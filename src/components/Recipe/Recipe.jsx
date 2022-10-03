@@ -1,40 +1,18 @@
 import PropTypes from 'prop-types';
 
-import {
-  AiOutlineClockCircle,
-  AiOutlinePieChart,
-  AiOutlineBarChart,
-} from 'react-icons/ai';
-import {
-  Card,
-  InfoContainer,
-  RecipeName,
-  RecipeImg,
-  InfoBlock,
-  Label,
-} from './Recipe.styled';
+import { Card, RecipeName, RecipeImg } from './Recipe.styled';
+import { Info } from 'components/InfoContainer/Info';
+import { Difficulty } from 'components/RecipeDifficulty/RecipeDifficulty';
 
 export const Recipe = ({
-  recipe: { name, time, servings, calories, image },
+  recipe: { name, time, servings, calories, image, difficulty },
 }) => {
   return (
     <Card>
       <RecipeImg src={image} alt="dish" width="100" />
       <RecipeName>{name}</RecipeName>
-      <InfoContainer>
-        <InfoBlock>
-          <AiOutlineClockCircle size={24} />
-          <Label>{time} min</Label>
-        </InfoBlock>
-        <InfoBlock>
-          <AiOutlinePieChart size={24} />
-          <Label>{servings} servings</Label>
-        </InfoBlock>
-        <InfoBlock>
-          <AiOutlineBarChart size={24} />
-          <Label>{calories} calories</Label>
-        </InfoBlock>
-      </InfoContainer>
+      <Info time={time} servings={servings} calories={calories}></Info>
+      <Difficulty difficulty={difficulty} />
     </Card>
   );
 };
@@ -46,5 +24,6 @@ Recipe.propTypes = {
     time: PropTypes.string.isRequired,
     servings: PropTypes.number.isRequired,
     calories: PropTypes.number.isRequired,
+    difficulty: PropTypes.oneOf(['easy', 'medium', 'hard']),
   }),
 };
